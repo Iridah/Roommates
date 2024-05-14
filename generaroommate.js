@@ -12,9 +12,9 @@ module.exports = async () => {
   const { name: { title, first, last }, email, picture: { large }, id: randomId } = newRoommateData;
   const nombre = `${title} ${first} ${last}`;
 
-  // Genera una ID unica (de ser necesario) y lo combina con random ID
-  const id = Math.floor(Math.random() * 1000000) + 1; // Generador de ID al azar
-  const roommateId = `${id}-${randomId}`;
+  // Genera una ID unica (de ser necesario)
+  const id = uuidv4(); // Generar UUID unico
+  const roommateId = id; // Usar el ID generado como ID del roommate
 
   // Convierte los datos del roommate en un objeto
   const newRoommate = {

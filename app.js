@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const nodemailer = require('nodemailer');
 const generateRoommate = require('./generaroommate.js');
 const cors = require('cors');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -109,25 +110,25 @@ app.get('/roommates', (req, res) => {
   res.json({ roommates });
 });
 
-// POST /roommate: Creates a new roommate
+// POST /roommate: Crear un roommate
 app.post('/roommate', async (req, res) => {
     try {
-      // Generate a new roommate using the imported function
+      // Generar un roommate, en base al .js adicional
       const newRoommate = await generateRoommate();
   
-      // Add the new roommate to the `roommates` array
+      // Añadir los datos recibidos al array `roommates`
       roommates.push(newRoommate);
   
-      // Save the updated roommates data to the JSON file
+      // Guardar los datos en el JSON       
       saveData(roommates, 'roommates.json');
-  
-      // Send a notification email (optional)
-      // ```javascript
+        
+      // Email de notificacion (optional)
+
       // const transporter = nodemailer.createTransport({
       //   host: '[se quitó una URL no válida]',
       //   port: 587,
       //   auth: {
-      //     user: '[dirección de correo electrónico eliminada]',
+      //     user: '[a_silva_q@icloud.com]',
       //     pass: 'your-password'
       //   }
       // });
@@ -140,11 +141,10 @@ app.post('/roommate', async (req, res) => {
       // };
   
       // await transporter.sendMail(mailOptions);
-      // ```
-  
+
       res.json({ message: 'Roommate agregado exitosamente' });
     } catch (err) {
-      console.error(chalk.red('Error creating roommate:', err));
+      console.error(chalk.red('Error al agregar roommate:', err));
       res.status(500).json({ message: 'Error al agregar roommate' });
     }
   });
