@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+const cors = require('cors');
+
 
 module.exports = async () => {
   // Fetch random roommate data from RandomUser API

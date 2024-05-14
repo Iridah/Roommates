@@ -3,6 +3,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const nodemailer = require('nodemailer');
 const generateRoommate = require('./generaroommate.js');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,6 +11,9 @@ const port = process.env.PORT || 3000;
 // Datos de Roommates y Gastos (parte vacio)
 let roommates = [];
 let gastos = [];
+
+// Prueba de carga CORS
+app.use(cors());
 
 // Carga de datos inicial desde el JSON (si existe)
 try {
